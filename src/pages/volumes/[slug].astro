@@ -28,16 +28,16 @@ const concepts = (await getCollection('concepts'))
       {concepts.length > 0 && (
         <>
           <h2>Concepts</h2>
-          <div class="grid">
+          <ul class="plain-list">
             {concepts.map((concept) => (
-              <article class="card">
+              <li>
                 <h3>
                   <a href={`/volumes/${volume.slug}/${concept.slug}/`}>{concept.data.title}</a>
                 </h3>
                 <p>{concept.data.summary}</p>
-              </article>
+              </li>
             ))}
-          </div>
+          </ul>
         </>
       )}
     </article>

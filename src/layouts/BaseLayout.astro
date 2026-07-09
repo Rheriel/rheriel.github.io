@@ -6,10 +6,9 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'A practical interview guide for working engineers.' } = Astro.props;
-const pageTitle = title === "The Busy Engineer's Interview Handbook"
-  ? title
-  : `${title} | The Busy Engineer's Interview Handbook`;
+const { title, description = 'Personal site and writing by Ban Finch.' } = Astro.props;
+const siteTitle = 'Ban Finch';
+const pageTitle = title === siteTitle ? siteTitle : `${title} | ${siteTitle}`;
 ---
 
 <!doctype html>
@@ -21,16 +20,21 @@ const pageTitle = title === "The Busy Engineer's Interview Handbook"
     <title>{pageTitle}</title>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="/">The Busy Engineer</a>
-      <nav aria-label="Primary">
-        <a href="/volumes/01-core-backend-concepts/">Volume 1</a>
-        <a href="/volumes/01-core-backend-concepts/transactions/">Transactions</a>
-        <a href="/volumes/01-core-backend-concepts/acid/">ACID</a>
-      </nav>
-    </header>
-    <main>
-      <slot />
-    </main>
+    <div class="site-shell">
+      <header class="site-rail">
+        <a class="identity" href="/" aria-label="Ban Finch home">
+          <span class="avatar" aria-hidden="true">BF</span>
+          <span class="brand">Ban Finch</span>
+        </a>
+        <nav aria-label="Primary">
+          <a href="/about/">About Me</a>
+          <a href="/blog/">Blog</a>
+          <a href="/writing/">Writing</a>
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+    </div>
   </body>
 </html>
