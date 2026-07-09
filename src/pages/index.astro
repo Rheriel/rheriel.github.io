@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const volumes = (await getCollection('volumes')).sort((a, b) => a.data.order - b.data.order);
+const concepts = (await getCollection('concepts')).sort((a, b) => a.data.order - b.data.order);
+const featured = concepts.filter((concept) => concept.data.volume === '01-core-backend-concepts');
+---
+
+<BaseLayout
+  title="The Busy Engineer's Interview Handbook"
+  description="A practical interview guide for experienced software engineers who want sharp technical interview vocabulary."
+>
+  <section class="hero">
+    <p class="eyebrow">Interview recall for working engineers</p>
+    <h1>The Busy Engineer's Interview Handbook</h1>
+    <p class="lede">
+      A practical guide for experienced software engineers who know how to build systems
+      but want to reconnect that experience with the vocabulary expected in technical interviews.
+    </p>
+    <div class="actions">
+      <a class="button" href="/volumes/01-core-backend-concepts/">Start Volume 1</a>
+      <a class="button secondary" href="/volumes/01-core-backend-concepts/transactions/">Read Transactions</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="volumes">
+    <h2 id="volumes">Volumes</h2>
+    <div class="grid">
+      {volumes.map((volume) => (
+        <article class="card">
+          <h3>
+            <a href={`/volumes/${volume.slug}/`}>{volume.data.title}</a>
+          </h3>
+          <p>{volume.data.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section aria-labelledby="start-here">
+    <h2 id="start-here">Start Here</h2>
+    <div class="grid">
+      {featured.map((concept) => (
+        <article class="card">
+          <h3>
+            <a href={`/volumes/${concept.data.volume}/${concept.slug}/`}>{concept.data.title}</a>
+          </h3>
+          <p>{concept.data.summary}</p>
+          <p class="meta">Level: {concept.data.level}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

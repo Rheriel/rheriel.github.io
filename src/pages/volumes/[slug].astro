@@ -1,0 +1,58 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const volumes = await getCollection('volumes');
+  return volumes.map((volume) => ({
+    params: { slug: volume.slug },
+    props: { volume }
+  }));
+}
+
+const { volume } = Astro.props;
+const { Content } = await render(volume);
+const concepts = (await getCollection('concepts'))
+  .filter((concept) => concept.data.volume === volume.slug)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title={volume.data.title} description={volume.data.description}>
+  <section class="content-layout">
+    <article class="prose">
+      <p class="eyebrow">Handbook volume</p>
+      <h1>{volume.data.title}</h1>
+      <p class="lede">{volume.data.description}</p>
+      <Content />
+
+      {concepts.length > 0 && (
+        <>
+          <h2>Concepts</h2>
+          <div class="grid">
+            {concepts.map((concept) => (
+              <article class="card">
+                <h3>
+                  <a href={`/volumes/${volume.slug}/${concept.slug}/`}>{concept.data.title}</a>
+                </h3>
+                <p>{concept.data.summary}</p>
+              </article>
+            ))}
+          </div>
+        </>
+      )}
+    </article>
+
+    <aside class="sidebar" aria-label="Volume navigation">
+      <h2>In This Volume</h2>
+      {concepts.length > 0 ? (
+        <ul>
+          {concepts.map((concept) => (
+            <li><a href={`/volumes/${volume.slug}/${concept.slug}/`}>{concept.data.title}</a></li>
+          ))}
+        </ul>
+      ) : (
+        <p class="meta">Concept pages are planned for this volume.</p>
+      )}
+    </aside>
+  </section>
+</BaseLayout>
