@@ -1,6 +1,10 @@
-# Deadlocks
-
-**Level:** ⭐⭐⭐ Explain trade-offs
+---
+title: "Deadlocks"
+level: "Explain trade-offs"
+volume: "01-core-backend-concepts"
+order: 7
+summary: "A deadlock happens when transactions wait on each other in a cycle, so the database must abort one to make progress."
+---
 
 ## Problem It Solves
 

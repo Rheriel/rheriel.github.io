@@ -1,6 +1,10 @@
-# Isolation Levels
-
-**Level:** ⭐⭐⭐⭐ Explain trade-offs
+---
+title: "Isolation Levels"
+level: "Explain trade-offs"
+volume: "01-core-backend-concepts"
+order: 3
+summary: "Isolation levels define how much a transaction is protected from other transactions running at the same time."
+---
 
 ## Problem It Solves
 

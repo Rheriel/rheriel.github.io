@@ -1,6 +1,10 @@
-# MVCC
-
-**Level:** ⭐⭐⭐⭐ Explain implementation
+---
+title: "MVCC"
+level: "Explain implementation"
+volume: "01-core-backend-concepts"
+order: 4
+summary: "MVCC lets a database keep multiple row versions so transactions can read a consistent snapshot without blocking most writes."
+---
 
 ## Problem It Solves
 

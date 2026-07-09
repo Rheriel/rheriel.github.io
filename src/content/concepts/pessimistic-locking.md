@@ -1,6 +1,10 @@
-# Pessimistic Locking
-
-**Level:** ⭐⭐⭐ Explain trade-offs
+---
+title: "Pessimistic Locking"
+level: "Explain trade-offs"
+volume: "01-core-backend-concepts"
+order: 6
+summary: "Pessimistic locking takes a lock before working with data so other transactions must wait before changing it."
+---
 
 ## Problem It Solves
 

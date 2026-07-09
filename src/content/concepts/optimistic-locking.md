@@ -1,6 +1,10 @@
-# Optimistic Locking
-
-**Level:** ⭐⭐⭐ Explain trade-offs
+---
+title: "Optimistic Locking"
+level: "Explain trade-offs"
+volume: "01-core-backend-concepts"
+order: 5
+summary: "Optimistic locking detects concurrent updates by checking that a record has not changed since it was read."
+---
 
 ## Problem It Solves
 
