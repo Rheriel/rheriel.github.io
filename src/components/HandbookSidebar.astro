@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  currentVolume?: string;
+  currentConcept?: string;
+}
+
+const { currentVolume, currentConcept } = Astro.props;
+
+const toRoman = (value: number) => {
+  const numerals: [number, string][] = [
+    [1000, 'M'],
+    [900, 'CM'],
+    [500, 'D'],
+    [400, 'CD'],
+    [100, 'C'],
+    [90, 'XC'],
+    [50, 'L'],
+    [40, 'XL'],
+    [10, 'X'],
+    [9, 'IX'],
+    [5, 'V'],
+    [4, 'IV'],
+    [1, 'I']
+  ];
+
+  let remaining = value;
+  let result = '';
+
+  for (const [number, numeral] of numerals) {
+    while (remaining >= number) {
+      result += numeral;
+      remaining -= number;
+    }
+  }
+
+  return result;
+};
+
+const concepts = await getCollection('concepts');
+const conceptsByVolume = concepts.reduce<Record<string, typeof concepts>>((groups, concept) => {
+  groups[concept.data.volume] = groups[concept.data.volume] ?? [];
+  groups[concept.data.volume].push(concept);
+  return groups;
+}, {});
+
+const volumes = (await getCollection('volumes'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((volume) => ({
+    ...volume,
+    concepts: (conceptsByVolume[volume.slug] ?? []).sort((a, b) => a.data.order - b.data.order)
+  }));
+---
+
+<nav class="handbook-nav" aria-label="Handbook volumes">
+  {
+    volumes.map((volume) => (
+      <details class="handbook-volume" open={volume.slug === currentVolume}>
+        <summary>
+          <a href={`/volumes/${volume.slug}/`}>
+            {`Volume ${toRoman(volume.data.order)}: ${volume.data.title.replace(/^Volume \d+:\s*/, '')}`}
+          </a>
+        </summary>
+        {volume.concepts.length > 0 ? (
+          <div class="sidebar-nav handbook-topics">
+            {volume.concepts.map((concept) => (
+              <a
+                href={`/volumes/${volume.slug}/${concept.slug}/`}
+                aria-current={concept.slug === currentConcept ? 'page' : undefined}
+              >
+                {concept.data.title}
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="handbook-empty">Planned</p>
+        )}
+      </details>
+    ))
+  }
+</nav>

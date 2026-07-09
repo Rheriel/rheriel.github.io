@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import HandbookSidebar from '../../components/HandbookSidebar.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
@@ -19,16 +20,7 @@ const concepts = (await getCollection('concepts'))
 
 <BaseLayout title={volume.data.title} description={volume.data.description}>
   <Fragment slot="sidebar">
-    <h2>In This Volume</h2>
-    {concepts.length > 0 ? (
-      <nav class="sidebar-nav" aria-label="Volume concepts">
-        {concepts.map((concept) => (
-          <a href={`/volumes/${volume.slug}/${concept.slug}/`}>{concept.data.title}</a>
-        ))}
-      </nav>
-    ) : (
-      <p class="meta">Concept pages for this volume are coming later.</p>
-    )}
+    <HandbookSidebar currentVolume={volume.slug} />
   </Fragment>
 
   <article class="prose">

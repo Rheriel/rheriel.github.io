@@ -187,9 +187,43 @@ p {
   font-size: 0.95rem;
 }
 
+.handbook-nav {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.handbook-volume summary {
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.handbook-volume summary a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.handbook-topics {
+  margin-top: 0.35rem;
+  padding-left: 1rem;
+}
+
+.handbook-empty {
+  margin: 0.25rem 0 0;
+  padding-left: 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .sidebar-nav {
   display: grid;
   gap: 0.3rem;
+}
+
+.sidebar-nav a[aria-current='page'] {
+  color: var(--text);
+  font-weight: 700;
 }
 
 .sidebar h2 {

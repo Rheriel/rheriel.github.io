@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import HandbookSidebar from '../../../components/HandbookSidebar.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
@@ -16,19 +17,11 @@ export async function getStaticPaths() {
 const { concept } = Astro.props;
 const { Content } = await render(concept);
 const volume = (await getCollection('volumes')).find((entry) => entry.slug === concept.data.volume);
-const siblingConcepts = (await getCollection('concepts'))
-  .filter((entry) => entry.data.volume === concept.data.volume)
-  .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout title={concept.data.title} description={concept.data.summary}>
   <Fragment slot="sidebar">
-    <h2>{volume?.data.title ?? 'This volume'}</h2>
-    <nav class="sidebar-nav" aria-label="Sibling concepts">
-      {siblingConcepts.map((entry) => (
-        <a href={`/volumes/${entry.data.volume}/${entry.slug}/`}>{entry.data.title}</a>
-      ))}
-    </nav>
+    <HandbookSidebar currentVolume={concept.data.volume} currentConcept={concept.slug} />
   </Fragment>
 
   <article class="prose">
