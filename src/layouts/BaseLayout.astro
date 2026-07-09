@@ -9,6 +9,7 @@ interface Props {
 const { title, description = 'Personal site and writing by Ban Finch.' } = Astro.props;
 const siteTitle = 'Ban Finch';
 const pageTitle = title === siteTitle ? siteTitle : `${title} | ${siteTitle}`;
+const hasSidebar = Astro.slots.has('sidebar');
 ---
 
 <!doctype html>
@@ -21,20 +22,28 @@ const pageTitle = title === siteTitle ? siteTitle : `${title} | ${siteTitle}`;
   </head>
   <body>
     <div class="site-shell">
-      <header class="site-rail">
+      <header class="site-header">
         <a class="identity" href="/" aria-label="Ban Finch home">
           <span class="avatar" aria-hidden="true">BF</span>
           <span class="brand">Ban Finch</span>
         </a>
-        <nav aria-label="Primary">
+        <span class="header-separator" aria-hidden="true"></span>
+        <nav class="primary-nav" aria-label="Primary">
           <a href="/about/">About Me</a>
           <a href="/blog/">Blog</a>
           <a href="/writing/">Writing</a>
         </nav>
       </header>
-      <main>
-        <slot />
-      </main>
+      <div class="page-grid">
+        {hasSidebar && (
+          <aside class="sidebar" aria-label="Context">
+            <slot name="sidebar" />
+          </aside>
+        )}
+        <main>
+          <slot />
+        </main>
+      </div>
     </div>
   </body>
 </html>

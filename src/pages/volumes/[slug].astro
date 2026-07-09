@@ -18,41 +18,39 @@ const concepts = (await getCollection('concepts'))
 ---
 
 <BaseLayout title={volume.data.title} description={volume.data.description}>
-  <section class="content-layout">
-    <article class="prose">
-      <p class="eyebrow">Handbook volume</p>
-      <h1>{volume.data.title}</h1>
-      <p class="lede">{volume.data.description}</p>
-      <Content />
+  <Fragment slot="sidebar">
+    <h2>In This Volume</h2>
+    {concepts.length > 0 ? (
+      <nav class="sidebar-nav" aria-label="Volume concepts">
+        {concepts.map((concept) => (
+          <a href={`/volumes/${volume.slug}/${concept.slug}/`}>{concept.data.title}</a>
+        ))}
+      </nav>
+    ) : (
+      <p class="meta">Concept pages for this volume are coming later.</p>
+    )}
+  </Fragment>
 
-      {concepts.length > 0 && (
-        <>
-          <h2>Concepts</h2>
-          <ul class="plain-list">
-            {concepts.map((concept) => (
-              <li>
-                <h3>
-                  <a href={`/volumes/${volume.slug}/${concept.slug}/`}>{concept.data.title}</a>
-                </h3>
-                <p>{concept.data.summary}</p>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-    </article>
+  <article class="prose">
+    <p class="eyebrow">Handbook volume</p>
+    <h1>{volume.data.title}</h1>
+    <p class="lede">{volume.data.description}</p>
+    <Content />
 
-    <aside class="sidebar" aria-label="Volume navigation">
-      <h2>In This Volume</h2>
-      {concepts.length > 0 ? (
-        <ul>
+    {concepts.length > 0 && (
+      <>
+        <h2>Concepts</h2>
+        <ul class="plain-list">
           {concepts.map((concept) => (
-            <li><a href={`/volumes/${volume.slug}/${concept.slug}/`}>{concept.data.title}</a></li>
+            <li>
+              <h3>
+                <a href={`/volumes/${volume.slug}/${concept.slug}/`}>{concept.data.title}</a>
+              </h3>
+              <p>{concept.data.summary}</p>
+            </li>
           ))}
         </ul>
-      ) : (
-        <p class="meta">Concept pages for this volume are coming later.</p>
-      )}
-    </aside>
-  </section>
+      </>
+    )}
+  </article>
 </BaseLayout>

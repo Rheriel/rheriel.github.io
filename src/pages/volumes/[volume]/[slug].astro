@@ -22,21 +22,19 @@ const siblingConcepts = (await getCollection('concepts'))
 ---
 
 <BaseLayout title={concept.data.title} description={concept.data.summary}>
-  <section class="content-layout">
-    <article class="prose">
-      <p class="eyebrow">{volume?.data.title ?? 'Handbook concept'}</p>
-      <h1>{concept.data.title}</h1>
-      <p class="meta">Level: {concept.data.level}</p>
-      <Content />
-    </article>
+  <Fragment slot="sidebar">
+    <h2>{volume?.data.title ?? 'This volume'}</h2>
+    <nav class="sidebar-nav" aria-label="Sibling concepts">
+      {siblingConcepts.map((entry) => (
+        <a href={`/volumes/${entry.data.volume}/${entry.slug}/`}>{entry.data.title}</a>
+      ))}
+    </nav>
+  </Fragment>
 
-    <aside class="sidebar" aria-label="Concept navigation">
-      <h2>{volume?.data.title ?? 'This volume'}</h2>
-      <ul>
-        {siblingConcepts.map((entry) => (
-          <li><a href={`/volumes/${entry.data.volume}/${entry.slug}/`}>{entry.data.title}</a></li>
-        ))}
-      </ul>
-    </aside>
-  </section>
+  <article class="prose">
+    <p class="eyebrow">{volume?.data.title ?? 'Handbook concept'}</p>
+    <h1>{concept.data.title}</h1>
+    <p class="meta">Level: {concept.data.level}</p>
+    <Content />
+  </article>
 </BaseLayout>

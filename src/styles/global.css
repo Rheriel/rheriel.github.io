@@ -38,19 +38,24 @@ a:hover {
 
 .site-shell {
   display: grid;
-  grid-template-columns: 180px minmax(0, 720px);
-  gap: 4rem;
   max-width: 980px;
   margin: 0 auto;
   padding: 4rem 1.5rem 5rem;
 }
 
-.site-rail {
-  align-self: start;
+.site-header {
   display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1rem;
+  margin-bottom: 3rem;
   font-size: 0.95rem;
+}
+
+.header-separator {
+  width: 1px;
+  height: 1.45rem;
+  background: #dddddd;
 }
 
 .identity {
@@ -79,33 +84,36 @@ a:hover {
   font-weight: 700;
 }
 
-nav {
+.primary-nav {
   display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+  flex-flow: row wrap;
+  gap: 0.5rem 1rem;
 }
 
-nav a {
+.primary-nav a,
+.sidebar-nav a {
   color: var(--muted);
   text-decoration: none;
 }
 
-nav a:hover {
+.primary-nav a:hover,
+.sidebar-nav a:hover {
   color: var(--text);
 }
 
+.page-grid {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 720px);
+  gap: 4rem;
+}
+
 main {
+  grid-column: 2;
   min-width: 0;
 }
 
-.prose,
-.content-layout {
+.prose {
   max-width: 720px;
-}
-
-.content-layout {
-  display: grid;
-  gap: 2.75rem;
 }
 
 .page-intro {
@@ -179,6 +187,11 @@ p {
   font-size: 0.95rem;
 }
 
+.sidebar-nav {
+  display: grid;
+  gap: 0.3rem;
+}
+
 .sidebar h2 {
   margin-top: 0;
   color: var(--text);
@@ -227,17 +240,20 @@ code {
   }
 
   .site-shell {
-    display: block;
     padding: 1.5rem 1.2rem 3.5rem;
   }
 
-  .site-rail {
+  .site-header {
     margin-bottom: 2.5rem;
   }
 
-  nav {
-    flex-flow: row wrap;
-    gap: 0.5rem 1rem;
+  .page-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  main {
+    grid-column: 1;
   }
 
   h1 {
