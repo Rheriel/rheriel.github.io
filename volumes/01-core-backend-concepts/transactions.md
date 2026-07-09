@@ -4,11 +4,11 @@
 
 ## Problem It Solves
 
-Sometimes several database operations must succeed or fail as one unit. Without a transaction, a partial failure can leave the system in a state that no business rule actually allows, such as charging a customer without recording the order.
+Sometimes several database changes need to succeed or fail together. Without a transaction, one change might succeed while another fails. That can leave the system in a state the business never wanted, like charging a customer without saving the order.
 
 ## One-Sentence Definition
 
-A transaction is a group of operations treated as a single unit of work, usually with commit and rollback behavior.
+A transaction groups operations so they commit together or roll back together.
 
 ## How I Probably Think About It
 
@@ -16,18 +16,18 @@ A transaction is a group of operations treated as a single unit of work, usually
 
 ## Interview Explanation (30 Seconds)
 
-A transaction lets me group related database operations so they either all commit or all roll back. I use it when partial success would corrupt the business state, like moving money between accounts or creating an order with its line items. The trade-off is that transactions can hold locks, increase contention, and make distributed workflows harder, so I keep them as small as possible and avoid mixing slow external calls into the transaction boundary.
+A transaction lets me group related database changes so they either all commit or all roll back. I use one when partial success would break the business state, like moving money between accounts or creating an order with its line items. The trade-off is that transactions can hold locks and slow down other work, so I keep them small. I also avoid slow network calls inside a transaction.
 
 ## When To Use It
 
 - Multiple writes must stay consistent.
-- A failure halfway through would create invalid business state.
-- A read-modify-write sequence needs protection from concurrent updates.
-- The database can enforce the consistency boundary locally.
+- A failure halfway through would leave bad business data.
+- A read-modify-write flow must be protected from other updates.
+- One database can protect the whole change.
 
 ## When NOT To Use It
 
-- The workflow spans services that cannot share one database transaction.
+- The workflow crosses services that cannot share one database transaction.
 - The operation includes slow external calls, such as payment gateways or HTTP APIs.
 - Eventual consistency is acceptable and simpler.
 - A single atomic database statement is enough.
@@ -42,16 +42,16 @@ A transaction lets me group related database operations so they either all commi
 
 ## Pros
 
-- Protects important invariants.
+- Protects important business rules.
 - Gives clear commit and rollback semantics.
-- Simplifies reasoning about local database changes.
-- Works well for short, bounded units of work.
+- Makes local database changes easier to reason about.
+- Works well for short units of work.
 
 ## Cons
 
 - Can increase lock contention.
 - Long transactions reduce concurrency.
-- Distributed transactions are complex and often avoided.
+- Distributed transactions are hard and often avoided.
 - Rollback does not undo external side effects outside the database.
 
 ## Common Interview Questions
@@ -75,7 +75,7 @@ A transaction lets me group related database operations so they either all commi
 
 ## What I'd Probably Say Instead
 
-"I would wrap that in a transaction so the database changes commit together. I would keep the transaction small and avoid doing network calls inside it. If the workflow crosses service boundaries, I would usually move to idempotency, an outbox, or a saga instead of trying to force one big transaction."
+"I would wrap that in a transaction so the database changes commit together. I would keep it small and avoid network calls inside it. If the workflow crosses service boundaries, I would usually use idempotency, an outbox, or a saga instead of trying to force one big transaction."
 
 ## Vocabulary Mapping
 

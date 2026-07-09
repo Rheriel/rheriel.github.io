@@ -1,3 +1,3 @@
 # Volume 5: Cloud & Infrastructure
 
-Planning starts after Volume 1 is complete.
+This volume comes after Volume 1.

@@ -1,3 +1,3 @@
 # Volume 4: Concurrency
 
-Planning starts after Volume 1 is complete.
+This volume comes after Volume 1.

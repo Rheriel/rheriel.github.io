@@ -1,7 +1,7 @@
 ---
 title: "Volume 6: Performance"
-description: "Latency, throughput, profiling, scaling, caching, and performance trade-offs."
+description: "Latency, throughput, profiling, scaling, caching, and the trade-offs behind performance work."
 order: 6
 ---
 
-Planned volume.
+This volume comes after Volume 1.

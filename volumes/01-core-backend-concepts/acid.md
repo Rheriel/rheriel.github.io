@@ -4,7 +4,7 @@
 
 ## Problem It Solves
 
-When data changes, the system needs clear rules for what counts as a correct result. ACID describes the guarantees a database transaction tries to provide so failures, concurrency, and crashes do not leave data in a surprising state.
+When data changes, the system needs clear rules for what "correct" means. ACID names the guarantees a database transaction tries to give you, so failures, concurrency, and crashes do not leave the data in a strange state.
 
 ## One-Sentence Definition
 
@@ -16,18 +16,18 @@ ACID is a set of transaction guarantees: atomicity, consistency, isolation, and 
 
 ## Interview Explanation (30 Seconds)
 
-ACID is the standard way to describe what a reliable database transaction gives you. Atomicity means all the work commits or none of it does. Consistency means the transaction moves the database from one valid state to another. Isolation controls how much concurrent transactions can see or interfere with each other. Durability means once the transaction commits, the result survives crashes. In interviews, I usually connect ACID back to correctness: it is about avoiding partial writes, broken invariants, confusing concurrent behavior, and lost committed data.
+ACID is the standard way to describe what a reliable database transaction gives you. Atomicity means all the work commits or none of it does. Consistency means the transaction keeps the database rules true. Isolation controls how much transactions can see or interfere with each other while they run. Durability means committed data survives crashes. In interviews, I connect ACID back to correctness: no half-finished writes, no broken rules, less confusing concurrency, and no lost committed data.
 
 ## When To Use It
 
-- Important business invariants must stay correct.
+- Important business rules must stay correct.
 - Multiple writes need transaction guarantees.
 - Concurrent requests may touch the same data.
-- The database is the right place to enforce the consistency boundary.
+- One database can protect the whole change.
 
 ## When NOT To Use It
 
-- The workflow spans multiple services and cannot share one transaction.
+- The workflow crosses services that cannot share one transaction.
 - Eventual consistency is acceptable.
 - Availability or latency matters more than strict immediate consistency.
 - The operation is a single write that already has enough atomic behavior.
@@ -44,7 +44,7 @@ ACID is the standard way to describe what a reliable database transaction gives 
 
 - Gives a shared vocabulary for transaction correctness.
 - Protects against partial failures.
-- Makes local database behavior easier to reason about.
+- Makes local database behavior easier to understand.
 - Helps explain trade-offs around isolation and contention.
 
 ## Cons
@@ -76,7 +76,7 @@ ACID is the standard way to describe what a reliable database transaction gives 
 
 ## What I'd Probably Say Instead
 
-"I would rely on the database transaction for the local consistency boundary. ACID means the transaction should not half-apply, should preserve the database rules, should behave predictably around concurrent transactions, and should survive after commit. If the workflow crosses services, I would not assume ACID covers the whole thing; I would design for retries, idempotency, and compensation."
+"I would rely on the database transaction for the local consistency boundary. ACID means the transaction should not half-apply, should keep the database rules true, should behave predictably around other transactions, and should survive after commit. If the workflow crosses services, I would not assume ACID covers the whole thing. I would design for retries, idempotency, and compensation."
 
 ## Vocabulary Mapping
 

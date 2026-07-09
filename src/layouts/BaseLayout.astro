@@ -6,7 +6,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'A practical interview guide for experienced software engineers.' } = Astro.props;
+const { title, description = 'A practical interview guide for working engineers.' } = Astro.props;
 const pageTitle = title === "The Busy Engineer's Interview Handbook"
   ? title
   : `${title} | The Busy Engineer's Interview Handbook`;

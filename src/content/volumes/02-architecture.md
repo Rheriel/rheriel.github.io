@@ -1,7 +1,7 @@
 ---
 title: "Volume 2: Architecture"
-description: "System design structure, boundaries, trade-offs, and the vocabulary used to explain architectural choices."
+description: "System design structure, boundaries, trade-offs, and clear words for architecture choices."
 order: 2
 ---
 
-Planned volume.
+This volume comes after Volume 1.

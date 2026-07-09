@@ -1,7 +1,7 @@
 ---
 title: "Volume 5: Cloud & Infrastructure"
-description: "Cloud primitives, infrastructure vocabulary, reliability patterns, and operational trade-offs."
+description: "Cloud basics, infrastructure words, reliability patterns, and operations trade-offs."
 order: 5
 ---
 
-Planned volume.
+This volume comes after Volume 1.

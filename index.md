@@ -1,6 +1,6 @@
 # The Busy Engineer's Interview Handbook
 
-A practical interview guide for experienced software engineers who know how to build systems but want to reconnect that experience with the vocabulary expected in technical interviews.
+A practical interview guide for engineers who already build systems, but want clearer words for technical interviews.
 
 ## Volumes
 
@@ -18,6 +18,4 @@ A practical interview guide for experienced software engineers who know how to b
 
 ## Project Notes
 
-- [Initial plan](initial-plan.md)
-- [Production tracking](tracking.md)
-- [Publishing plan](publishing.md)
+Private planning files live under `.ignore/`.

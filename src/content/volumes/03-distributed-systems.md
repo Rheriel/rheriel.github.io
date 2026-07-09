@@ -1,7 +1,7 @@
 ---
 title: "Volume 3: Distributed Systems"
-description: "Coordination, consistency, failure modes, and distributed trade-offs."
+description: "Coordination, consistency, failures, and the trade-offs that come with distributed systems."
 order: 3
 ---
 
-Planned volume.
+This volume comes after Volume 1.
