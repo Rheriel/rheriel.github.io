@@ -7,7 +7,6 @@ interface Props {
 }
 
 const { currentVolume, currentConcept } = Astro.props;
-const activeProductionVolume = '04-concurrency';
 
 const toRoman = (value: number) => {
   const numerals: [number, string][] = [
@@ -62,7 +61,6 @@ const volumes = (await getCollection('volumes'))
           <a href={`/volumes/${volume.slug}/`}>
             {`Volume ${toRoman(volume.data.order)}: ${volume.data.title.replace(/^Volume \d+:\s*/, '')}`}
           </a>
-          {volume.slug === activeProductionVolume && <span class="current-focus">Current focus</span>}
         </summary>
         {volume.concepts.length > 0 ? (
           <div class="sidebar-nav handbook-topics">

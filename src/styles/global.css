@@ -208,13 +208,6 @@ p {
   text-decoration: none;
 }
 
-.current-focus {
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
 .handbook-topics {
   margin-top: 0.35rem;
   padding-left: 1rem;
