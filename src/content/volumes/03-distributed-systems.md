@@ -4,4 +4,4 @@ description: "Coordination, consistency, failures, and the trade-offs that come 
 order: 3
 ---
 
-This volume comes after Volume 1.
+This volume comes after the architecture vocabulary in Volume 2. It focuses on the places where systems stop being single-process or single-database problems: coordination, partial failure, routing, replication, and graceful degradation.

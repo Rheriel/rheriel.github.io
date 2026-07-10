@@ -193,6 +193,10 @@ p {
 }
 
 .handbook-volume summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.5rem;
   color: var(--text);
   cursor: pointer;
   font-weight: 700;
@@ -202,6 +206,13 @@ p {
 .handbook-volume summary a {
   color: inherit;
   text-decoration: none;
+}
+
+.current-focus {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .handbook-topics {
